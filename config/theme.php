@@ -3,14 +3,14 @@
 // GLOBAL THEME FILE - Changing this updates the entire UI
 
 $theme = [
-    'primary' => '#2563eb', // Blue 600
-    'secondary' => '#1e40af', // Blue 800
-    'background' => '#f9fafb', // Gray 50
-    'sidebar' => '#111827', // Gray 900
-    'text' => '#111827', // Gray 900
+    'primary' => '#d97706', // Spice Amber 600
+    'secondary' => '#92400e', // Deep Earth 800
+    'background' => '#fffbeb', // Warm Cream 50
+    'sidebar' => '#451a03', // Dark Wood
+    'text' => '#1f2937', // Charcoal
     'light_text' => '#ffffff',
-    'accent' => '#f59e0b', // Amber 500
-    'font_family' => "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    'accent' => '#ea580c', // Darker Spice
+    'font_family' => "'Outfit', 'Inter', sans-serif"
 ];
 
 /**
