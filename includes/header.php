@@ -11,7 +11,7 @@ require_once __DIR__ . '/../config/auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?php echo($page_title ? $page_title . ' - ' : '') . get_setting('system_name', 'CBE System'); ?>
+        <?php echo($page_title ? $page_title . ' - ' : '') . get_setting('system_name', 'Swahili Food'); ?>
     </title>
 
     <!-- Dynamic Theme CSS -->
@@ -62,11 +62,15 @@ else: ?>
                                 <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px;"><?php echo get_setting('system_name', 'Swahili Food'); ?></span>
                             </div>
                             <div class="nav-links">
-                                <a href="/index.php">Mwanzo</a>
-                                <a href="/index.php#about">Kuhusu Sisi</a>
-                                <a href="/index.php#contact">Mawasiliano</a>
+                                <a href="/index.php">Home</a>
+                                <a href="/index.php#about">About Us</a>
+                                <a href="/index.php#contact">Contact</a>
                                 <?php if (is_logged_in()): ?>
-                                    <a href="/dashboard.php" class="btn btn-primary btn-sm">Dashboard</a>
+                                    <?php if (has_role('admin')): ?>
+                                        <a href="/dashboard.php" class="btn btn-primary btn-sm">Dashboard</a>
+                                    <?php
+        endif; ?>
+                                    <a href="/logout.php" class="btn btn-danger btn-sm" style="background-color: #ef4444; color: white;">Logout</a>
                                 <?php
     else: ?>
                                     <a href="/login.php">Login</a>

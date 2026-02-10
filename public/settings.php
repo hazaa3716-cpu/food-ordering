@@ -14,9 +14,9 @@ foreach ($settings_raw as $s) {
 
 // Default settings if empty
 $defaults = [
-    'system_name' => 'CBE Management System',
-    'contact_email' => 'support@cbe.ac.tz',
-    'footer_text' => '© 2026 CBE Boilerplate'
+    'system_name' => 'Swahili Food Ordering',
+    'contact_email' => 'info@swahili-food.co.tz',
+    'footer_text' => '© 2026 Swahili Food Ordering'
 ];
 
 foreach ($defaults as $key => $val) {
@@ -49,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="alert alert-success">
                 <?php echo $success; ?>
             </div>
-        <?php endif; ?>
+        <?php
+endif; ?>
 
         <form method="POST">
             <div class="form-group">

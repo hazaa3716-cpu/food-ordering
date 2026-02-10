@@ -5,11 +5,12 @@
     </div> <!-- .main-content -->
     </main> <!-- .content-area -->
     </div> <!-- .app-container -->
-<?php endif; ?>
+<?php
+endif; ?>
 
 <footer
     style="text-align: center; padding: 1.5rem; color: #6b7280; font-size: 0.875rem; border-top: 1px solid #f3f4f6; margin-top: auto;">
-    <?php echo get_setting('footer_text', '© 2026 CBE Boilerplate'); ?>
+    <?php echo get_setting('footer_text', '© 2026 Swahili Food Ordering'); ?>
 </footer>
 
 <script src="/assets/js/app.js"></script>

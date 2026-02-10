@@ -4,8 +4,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <aside class="sidebar">
     <div class="sidebar-header">
-        <img src="/assets/images/CBE_Logo2.png" alt="Logo" style="width: 30px; height: auto; border-radius: 4px;">
-        <span style="font-size: 0.85rem;"><?php echo strtoupper(get_setting('system_name', 'CBE SYSTEM')); ?></span>
+        <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+            <path d="M35 20V45M35 45C35 50 38 53 43 53V80M27 20V43C27 48 30 51 35 51M43 20V43C43 48 40 51 35 51" stroke="var(--primary)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M65 20C65 20 65 50 65 55C65 60 62 63 57 63V80" stroke="var(--secondary)" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <span style="font-size: 0.85rem; font-weight: 700;"><?php echo strtoupper(get_setting('system_name', 'SWAHILI FOOD')); ?></span>
     </div>
     <nav class="sidebar-nav">
         <ul>
@@ -34,7 +37,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li class="<?php echo $current_page == 'settings.php' ? 'active' : ''; ?>">
                     <a href="/settings.php"><i class="fas fa-cog"></i> System Settings</a>
                 </li>
-            <?php endif; ?>
+            <?php
+endif; ?>
         </ul>
     </nav>
 </aside>

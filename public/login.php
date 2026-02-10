@@ -1,6 +1,6 @@
 <?php
 // public/login.php
-$page_title = 'Login - Boilerplate';
+$page_title = 'Login';
 include __DIR__ . '/../includes/header.php';
 
 if (is_logged_in()) {

@@ -55,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pdo->commit();
             echo json_encode(['success' => true, 'message' => 'Registration successful!']);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             $pdo->rollBack();
             echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
@@ -82,15 +83,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['roles'] = $roles;
                 $_SESSION['user'] = $user;
 
+                // Determine redirect path based on role
+                $redirect = in_array('admin', $roles) ? '/dashboard.php' : '/index.php#about';
+
                 // Log activity
                 $stmt = $pdo->prepare("INSERT INTO activity_logs (user_id, action) VALUES (?, ?)");
                 $stmt->execute([$user['id'], 'Login']);
 
-                echo json_encode(['success' => true, 'message' => 'Login successful', 'redirect' => '/dashboard.php']);
-            } else {
+                echo json_encode(['success' => true, 'message' => 'Login successful', 'redirect' => $redirect]);
+            }
+            else {
                 echo json_encode(['success' => false, 'message' => 'Invalid username or password']);
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
     }
