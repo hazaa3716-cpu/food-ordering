@@ -22,21 +22,20 @@ $drinks = array_filter($allItems, fn($i) => $i['category'] == 'Kinywaji');
         <p class="brand-subtitle">Ladha Halisi ya Pwani na Bara</p>
         
         <div class="search-container">
-            <form action="" method="GET" class="search-bar">
+            <div class="search-bar">
                 <div class="input-wrapper">
                     <i class="fas fa-search"></i>
-                    <input type="text" name="search" placeholder="Search for Pilau, Biryani, Wali..." id="food-search">
+                    <input type="text" placeholder="Tafuta Pilau, Biryani, Wali..." id="food-search" oninput="filterSearch()">
                 </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
+            </div>
         </div>
 
         <div class="filter-container">
             <span class="filter-label">Kundi:</span>
             <div class="filter-chips">
-                <button class="filter-chip active" onclick="filterItems('all')">Vyote</button>
-                <button class="filter-chip" onclick="filterItems('Chakula')">Chakula</button>
-                <button class="filter-chip" onclick="filterItems('Kinywaji')">Vinywaji</button>
+                <button class="filter-chip active" onclick="filterCategory('all', this)">Vyote</button>
+                <button class="filter-chip" onclick="filterCategory('Chakula', this)">Chakula</button>
+                <button class="filter-chip" onclick="filterCategory('Kinywaji', this)">Vinywaji</button>
             </div>
         </div>
     </div>
@@ -51,7 +50,7 @@ $drinks = array_filter($allItems, fn($i) => $i['category'] == 'Kinywaji');
 
         <div class="menu-grid" id="menu-grid">
             <?php foreach ($allItems as $item): ?>
-                <div class="menu-card" data-category="<?php echo $item['category']; ?>">
+                <div class="menu-card" data-category="<?php echo $item['category']; ?>" data-name="<?php echo strtolower($item['name']); ?>">
                     <div class="menu-image">
                         <img src="<?php echo $item['image_url'] ?? 'https://via.placeholder.com/400x300'; ?>" alt="<?php echo $item['name']; ?>">
                         <span class="category-badge"><?php echo $item['category']; ?></span>
@@ -61,7 +60,7 @@ $drinks = array_filter($allItems, fn($i) => $i['category'] == 'Kinywaji');
                         <p><?php echo $item['description']; ?></p>
                         <div class="menu-footer">
                             <span class="price">TZS <?php echo number_format($item['price']); ?></span>
-                            <button class="btn btn-primary btn-sm btn-order">Agiza Sasa</button>
+                            <a href="<?php echo is_logged_in() ? '/dashboard.php' : '/register.php'; ?>" class="btn btn-primary btn-sm">Agiza Sasa</a>
                         </div>
                     </div>
                 </div>
@@ -71,16 +70,73 @@ endforeach; ?>
     </div>
 </section>
 
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="container about-content">
+        <div class="section-header">
+            <h2>Kuhusu Sisi</h2>
+            <p>Swahili Food ni kimbilio lako la vyakula asilia vya Kitanzania.</p>
+        </div>
+        <div class="about-text">
+            <p>Lengo letu ni kutoa huduma bora ya chakula kinachopikwa kwa weledi na viungo safi kutoka mashambani. Tunajivunia kuleta ladha ya nyumbani popote ulipo, kuanzia Pilau ya Zanzibar hadi Samaki wa kukaanga wa Ziwa Victoria.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Mawasiliano</h2>
+            <p>Tuna hamu ya kusikia kutoka kwako! Wasiliana nasi kupitia njia zozote hapa chini.</p>
+        </div>
+        <div class="contact-grid">
+            <a href="tel:<?php echo get_setting('contact_phone', '+255 700 000 000'); ?>" class="contact-item card-hover">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Tupigie</h3>
+                <p><?php echo get_setting('contact_phone', '+255 700 000 000'); ?></p>
+                <span class="contact-action">Piga sasa &rarr;</span>
+            </a>
+            <a href="mailto:<?php echo get_setting('contact_email', 'info@swahili-food.co.tz'); ?>" class="contact-item card-hover">
+                <i class="fas fa-envelope-open-text"></i>
+                <h3>Tuandikie Email</h3>
+                <p><?php echo get_setting('contact_email', 'info@swahili-food.co.tz'); ?></p>
+                <span class="contact-action">Tuma ujumbe &rarr;</span>
+            </a>
+            <div class="contact-item card-hover">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Mahali Tulipo</h3>
+                <p><?php echo get_setting('location', 'Mikocheni, Dar es Salaam'); ?></p>
+                <span class="contact-action">Fika ofisini &rarr;</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <script>
-function filterItems(category) {
-    const cards = document.querySelectorAll('.menu-card');
+let currentCategory = 'all';
+
+function filterCategory(category, el) {
+    currentCategory = category;
     const chips = document.querySelectorAll('.filter-chip');
-    
     chips.forEach(c => c.classList.remove('active'));
-    event.target.classList.add('active');
+    el.classList.add('active');
+    applyFilters();
+}
+
+function filterSearch() {
+    applyFilters();
+}
+
+function applyFilters() {
+    const searchTerm = document.getElementById('food-search').value.toLowerCase();
+    const cards = document.querySelectorAll('.menu-card');
 
     cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
+        const matchesCategory = (currentCategory === 'all' || card.dataset.category === currentCategory);
+        const matchesSearch = card.dataset.name.includes(searchTerm);
+        
+        if (matchesCategory && matchesSearch) {
             card.style.display = 'block';
         } else {
             card.style.display = 'none';

@@ -53,16 +53,18 @@ else: ?>
                         <div class="nav-container">
                             <div class="nav-logo">
                                 <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
-                                    <path d="M50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95C74.8528 95 95 74.8528 95 50C95 25.1472 74.8528 5 50 5ZM50 85C30.67 85 15 69.33 15 50C15 30.67 30.67 15 50 15C69.33 15 85 30.67 85 50C85 69.33 69.33 85 50 85Z" fill="var(--primary)"/>
-                                    <path d="M50 25C40 25 32 33 32 43V57C32 67 40 75 50 75C60 75 68 67 68 57V43C68 33 60 25 50 25ZM63 57C63 64.18 57.18 70 50 70C42.82 70 37 64.18 37 57V43C37 35.82 42.82 30 50 30C57.18 30 63 35.82 63 43V57Z" fill="var(--secondary)"/>
-                                    <path d="M50 40V60M40 50H60" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+                                    <!-- Fork -->
+                                    <path d="M35 20V45M35 45C35 50 38 53 43 53V80M27 20V43C27 48 30 51 35 51M43 20V43C43 48 40 51 35 51" stroke="var(--primary)" stroke-width="5" stroke-linecap="round"/>
+                                    <!-- Knife -->
+                                    <path d="M65 20C65 20 65 50 65 55C65 60 62 63 57 63V80M57 63C62 63 65 60 65 55" stroke="var(--secondary)" stroke-width="5" stroke-linecap="round"/>
+                                    <path d="M65 20V55C65 65 57 65 57 65V20H65Z" fill="var(--secondary)" opacity="0.2"/>
                                 </svg>
-                                <span><?php echo get_setting('system_name', 'Swahili Food'); ?></span>
+                                <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px;"><?php echo get_setting('system_name', 'Swahili Food'); ?></span>
                             </div>
                             <div class="nav-links">
-                                <a href="/index.php">Home</a>
-                                <a href="#features">About </a>
-                                <a href="#contact">Contact</a>
+                                <a href="/index.php">Mwanzo</a>
+                                <a href="/index.php#about">Kuhusu Sisi</a>
+                                <a href="/index.php#contact">Mawasiliano</a>
                                 <?php if (is_logged_in()): ?>
                                     <a href="/dashboard.php" class="btn btn-primary btn-sm">Dashboard</a>
                                 <?php
